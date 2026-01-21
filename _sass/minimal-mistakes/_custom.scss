@@ -1,0 +1,55 @@
+/* Typora/GFM-style admonitions:
+   > [!TIP]
+   > content...
+   Supported: TIP, NOTE, IMPORTANT, WARNING, CAUTION
+*/
+
+/* Base container */
+blockquote.admonition {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1rem;
+  border-left: 0.35rem solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+blockquote.admonition > :first-child { margin-top: 0; }
+blockquote.admonition > :last-child  { margin-bottom: 0; }
+
+/* Title row */
+blockquote.admonition .admonition__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  margin: 0 0 0.35rem 0;
+  line-height: 1.2;
+}
+
+/* Use Font Awesome (already used by Minimal Mistakes) */
+blockquote.admonition .admonition__title::before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  display: inline-block;
+}
+
+/* Type colors + icons */
+blockquote.admonition--tip      { border-left-color: #10b981; }
+blockquote.admonition--tip .admonition__title { color: #10b981; }
+blockquote.admonition--tip .admonition__title::before { content: "\f0eb"; } /* lightbulb */
+
+blockquote.admonition--note     { border-left-color: #3b82f6; }
+blockquote.admonition--note .admonition__title { color: #3b82f6; }
+blockquote.admonition--note .admonition__title::before { content: "\f05a"; } /* info-circle */
+
+blockquote.admonition--important { border-left-color: #8b5cf6; }
+blockquote.admonition--important .admonition__title { color: #8b5cf6; }
+blockquote.admonition--important .admonition__title::before { content: "\f4ad"; } /* comment-dots */
+
+blockquote.admonition--warning  { border-left-color: #f59e0b; }
+blockquote.admonition--warning .admonition__title { color: #f59e0b; }
+blockquote.admonition--warning .admonition__title::before { content: "\f071"; } /* exclamation-triangle */
+
+blockquote.admonition--caution  { border-left-color: #ef4444; }
+blockquote.admonition--caution .admonition__title { color: #ef4444; }
+blockquote.admonition--caution .admonition__title::before { content: "\f06a"; } /* exclamation-circle */

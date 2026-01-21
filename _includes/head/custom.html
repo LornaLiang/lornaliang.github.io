@@ -14,3 +14,57 @@
 <script async id="MathJax-script"
   src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
+<script>
+(function () {
+  var typeMap = {
+    TIP: "tip",
+    NOTE: "note",
+    IMPORTANT: "important",
+    WARNING: "warning",
+    CAUTION: "caution"
+  };
+
+  function transform() {
+    var quotes = document.querySelectorAll("blockquote");
+    quotes.forEach(function (bq) {
+      // first direct child paragraph
+      var p = bq.querySelector(":scope > p");
+      if (!p) return;
+
+      var text = (p.textContent || "").trim();
+      var m = text.match(/^\[\!(TIP|NOTE|IMPORTANT|WARNING|CAUTION)\]\s*/i);
+      if (!m) return;
+
+      var raw = m[1].toUpperCase();
+      var type = typeMap[raw];
+      if (!type) return;
+
+      // Remove marker from first paragraph
+      var rest = text.replace(m[0], "").trim();
+
+      // Add classes
+      bq.classList.add("admonition", "admonition--" + type);
+
+      // Insert title
+      var title = document.createElement("div");
+      title.className = "admonition__title";
+      title.textContent = raw.charAt(0) + raw.slice(1).toLowerCase(); // Tip/Note/...
+
+      bq.insertBefore(title, p);
+
+      // If first paragraph becomes empty, remove it; else keep remainder text
+      if (rest) {
+        p.textContent = rest;
+      } else {
+        p.remove();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", transform);
+  } else {
+    transform();
+  }
+})();
+</script>
