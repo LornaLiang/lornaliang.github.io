@@ -24,10 +24,31 @@
     CAUTION: "caution"
   };
 
+  function typesetMath(elems) {
+    // MathJax is loaded async; wait until it's available then typeset.
+    if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+      window.MathJax.typesetPromise(elems);
+      return;
+    }
+    var tries = 0;
+    var timer = setInterval(function () {
+      tries += 1;
+      if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+        clearInterval(timer);
+        window.MathJax.typesetPromise(elems);
+      } else if (tries >= 50) { // ~5 seconds
+        clearInterval(timer);
+      }
+    }, 100);
+  }
+
   function transform() {
+    var touched = [];
+
     var quotes = document.querySelectorAll("blockquote");
     quotes.forEach(function (bq) {
-      // first direct child paragraph
+      if (bq.classList.contains("admonition")) return; // avoid double transform
+
       var p = bq.querySelector(":scope > p");
       if (!p) return;
 
@@ -39,26 +60,29 @@
       var type = typeMap[raw];
       if (!type) return;
 
-      // Remove marker from first paragraph
       var rest = text.replace(m[0], "").trim();
 
-      // Add classes
       bq.classList.add("admonition", "admonition--" + type);
 
-      // Insert title
       var title = document.createElement("div");
       title.className = "admonition__title";
-      title.textContent = raw.charAt(0) + raw.slice(1).toLowerCase(); // Tip/Note/...
+      title.textContent = raw.charAt(0) + raw.slice(1).toLowerCase();
 
       bq.insertBefore(title, p);
 
-      // If first paragraph becomes empty, remove it; else keep remainder text
       if (rest) {
         p.textContent = rest;
       } else {
         p.remove();
       }
+
+      touched.push(bq);
     });
+
+    // Typeset only changed blocks (fast) and safe for async MathJax load.
+    if (touched.length) {
+      typesetMath(touched);
+    }
   }
 
   if (document.readyState === "loading") {
@@ -68,3 +92,4 @@
   }
 })();
 </script>
+

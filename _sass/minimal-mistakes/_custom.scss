@@ -53,3 +53,29 @@ blockquote.admonition--warning .admonition__title::before { content: "\f071"; } 
 blockquote.admonition--caution  { border-left-color: #ef4444; }
 blockquote.admonition--caution .admonition__title { color: #ef4444; }
 blockquote.admonition--caution .admonition__title::before { content: "\f06a"; } /* exclamation-circle */
+/* Improve spacing inside admonitions */
+blockquote.admonition p {
+  margin: 0.35rem 0;
+}
+
+blockquote.admonition ul,
+blockquote.admonition ol {
+  margin: 0.35rem 0 0.35rem 1.25rem;
+}
+
+blockquote.admonition pre,
+blockquote.admonition code {
+  /* keep code readable inside callouts */
+  font-size: 0.95em;
+}
+
+/* Make background adapt a bit better on light skins */
+blockquote.admonition {
+  background: rgba(0, 0, 0, 0.025);
+}
+
+/* If Font Awesome fails to load, avoid empty icon gap */
+blockquote.admonition .admonition__title::before {
+  width: 1.1em;
+  text-align: center;
+}
