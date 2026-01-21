@@ -79,3 +79,46 @@ blockquote.admonition .admonition__title::before {
   width: 1.1em;
   text-align: center;
 }
+/* Force override Minimal Mistakes blockquote styling */
+blockquote.admonition {
+  border-left-width: 0.35rem !important;
+  border-left-style: solid !important;
+  border-left-color: rgba(0, 0, 0, 0.15) !important;
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+
+blockquote.admonition.admonition--tip {
+  border-left-color: #10b981 !important;
+}
+blockquote.admonition.admonition--tip .admonition__title {
+  color: #10b981 !important;
+}
+
+blockquote.admonition.admonition--note {
+  border-left-color: #3b82f6 !important;
+}
+blockquote.admonition.admonition--note .admonition__title {
+  color: #3b82f6 !important;
+}
+
+blockquote.admonition.admonition--important {
+  border-left-color: #8b5cf6 !important;
+}
+blockquote.admonition.admonition--important .admonition__title {
+  color: #8b5cf6 !important;
+}
+
+blockquote.admonition.admonition--warning {
+  border-left-color: #f59e0b !important;
+}
+blockquote.admonition.admonition--warning .admonition__title {
+  color: #f59e0b !important;
+}
+
+blockquote.admonition.admonition--caution {
+  border-left-color: #ef4444 !important;
+}
+blockquote.admonition.admonition--caution .admonition__title {
+  color: #ef4444 !important;
+}
+
