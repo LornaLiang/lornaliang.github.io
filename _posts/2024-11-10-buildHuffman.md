@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "构建度为K的哈夫曼树"
 date:   2024-11-10
 tag: ds

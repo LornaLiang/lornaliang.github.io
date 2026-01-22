@@ -1,3 +1,8 @@
+---
+title: ""
+layout: single
+---
+
 # Netflix 数据探索-CSV数据分析
 
 数据来源

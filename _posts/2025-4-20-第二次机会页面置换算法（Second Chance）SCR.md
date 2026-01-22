@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title:  "第二次机会页面置换算法（Second Chance）SCR"
 date:   2025-04-20
 tag: OS
